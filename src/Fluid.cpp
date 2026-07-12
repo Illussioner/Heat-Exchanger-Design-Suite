@@ -1,6 +1,6 @@
 #include "Fluid.h"
 #include <iostream>
-
+#include <stdexcept>
 Fluid::Fluid()
 {
   name = "";
@@ -18,14 +18,24 @@ void Fluid::input()
   std::cout << "Mass Flow Rate (kg/s): ";
   std::cin >> massFlowRate;
 
-  std::cout << "Inlet Temperature (°C): ";
+  if (massFlowRate <= 0)
+  {
+    throw std::invalid_argument("Mass flow rate must be positive.");
+  }
+
+  std::cout << "Inlet Temperature (" << "\u00B0" << "C): ";
   std::cin >> inletTemperature;
 
-  std::cout << "Outlet Temperature (°C): ";
+  std::cout << "Outlet Temperature (" << "\u00B0" << "C): ";
   std::cin >> outletTemperature;
 
   std::cout << "Specific Heat Cp (kJ/kg.K): ";
   std::cin >> specificHeat;
+
+  if (specificHeat <= 0)
+  {
+    throw std::invalid_argument("Specific heat must be positive.");
+  }
 }
 
 double Fluid::heatDuty() const

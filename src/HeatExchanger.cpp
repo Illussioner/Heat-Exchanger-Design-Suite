@@ -1,6 +1,7 @@
 #include "HeatExchanger.h"
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 
 HeatExchanger::HeatExchanger()
 {
@@ -9,11 +10,21 @@ void HeatExchanger::inputData()
 {
   std::cout << "\n===== HOT FLUID =====\n";
   hotFluid.input();
+  if (hotFluid.inletTemperature <= hotFluid.outletTemperature)
+  {
+    throw std::invalid_argument(
+        "Hot fluid inlet temperature must be greater than outlet temperature.");
+  }
 
   std::cout << "\n===== COLD FLUID =====\n";
   coldFluid.input();
+  if (coldFluid.inletTemperature >= coldFluid.outletTemperature)
+  {
+    throw std::invalid_argument(
+        "Cold fluid outlet temperature must be greater than inlet temperature.");
+  }
 
-  std::cout << "\nOverall Heat Transfer Coefficient U (kW/m².K): ";
+  std::cout << "\nOverall Heat Transfer Coefficient U (kW/m" << "\u00B2" << ".K): ";
   std::cin >> overallU;
 
   int choice;
@@ -30,25 +41,35 @@ void HeatExchanger::inputData()
 
 void HeatExchanger::calculate()
 {
-  double heatDuty = std::abs(hotFluid.heatDuty());
+  double Qhot = std::abs(hotFluid.heatDuty());
+  double Qcold = std::abs(coldFluid.heatDuty());
+  if (std::abs(Qhot - Qcold) > 5.0)
+  {
+    std::cout
+        << "\nWarning: Energy balance mismatch.\n";
+  }
+  
   double lmtd = calculateLMTD();
-  double area = calculateArea (heatDuty, lmtd);
+  double area = calculateArea (Qhot, lmtd);
   std::cout << "\n=================================\n";
 
   std::cout
     << "Heat Duty :"
-    << heatDuty
+    << std::fixed << std::setprecision(2)
+    << Qhot
     <<"kW\n";
 
   std::cout
       << "LMTD : "
+      << std::fixed << std::setprecision(2)
       << lmtd
-      << " °C\n";
+      << " " << "\u00B0" << "C\n";
 
   std::cout
       << "Required Area : "
+      << std::fixed << std::setprecision(2)
       << area
-      << " m²\n";
+      << " m" << "\u00B2" << "\n";
 }
 
 double HeatExchanger::calculateLMTD() const{
@@ -66,7 +87,15 @@ double HeatExchanger::calculateLMTD() const{
 
     deltaT2 = hotFluid.outletTemperature - coldFluid.outletTemperature;
   }
+  if (deltaT1 <= 0 || deltaT2 <= 0)
+  {
+    throw std::runtime_error("Invalid temperature difference.");
+  }
 
+  if (std::abs(deltaT1 - deltaT2) < 1e-9)
+  {
+    return deltaT1;
+  }
   return (deltaT1 - deltaT2) / std::log(deltaT1/ deltaT2);
 };
 
