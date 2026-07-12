@@ -5,20 +5,18 @@
 
 class Fluid
 {
-private:
-  
-
 public:
   std::string name;
-
   double massFlowRate;
-
   double inletTemperature;
-
   double outletTemperature;
-
   double specificHeat;
-  Fluid();
+
+  Fluid(); // this is a constructor 
+ 
+  void input(); // these are methods
+
+  double heatDuty() const;
 };
 
 #endif

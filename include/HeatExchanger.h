@@ -12,6 +12,10 @@ private:
 
 public:
   HeatExchanger();
+
+  void inputData();
+
+  void calculate();
 };
 
 #endif
