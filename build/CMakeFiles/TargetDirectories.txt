@@ -1,0 +1,3 @@
+C:/Users/ishan/Desktop/Heat-Exchanger-Design-Suite/build/CMakeFiles/HeatExchanger.dir
+C:/Users/ishan/Desktop/Heat-Exchanger-Design-Suite/build/CMakeFiles/edit_cache.dir
+C:/Users/ishan/Desktop/Heat-Exchanger-Design-Suite/build/CMakeFiles/rebuild_cache.dir
