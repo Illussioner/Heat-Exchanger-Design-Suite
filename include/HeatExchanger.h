@@ -27,6 +27,18 @@ public:
   double calculateLMTD() const;
 
   double calculateArea(double heatDuty, double lmtd) const;
+
+  double calculateCMin() const;
+
+  double calculateCMax() const;
+
+  double calculateNTU(double area) const;
+
+  double calculateCounterFlowEffectiveness(double NTU, double Cr) const;
+
+  double calculateParallelFlowEffectiveness(double NTU, double Cr) const;
+
+  double calculateEffectiveness() const;
 };
 
 #endif

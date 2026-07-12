@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
-
+#include <algorithm>
 HeatExchanger::HeatExchanger()
 {
 }
@@ -51,6 +51,10 @@ void HeatExchanger::calculate()
   
   double lmtd = calculateLMTD();
   double area = calculateArea (Qhot, lmtd);
+  double Cmin = calculateCMin();
+  double Cmax = calculateCMax();
+  double NTU = calculateNTU(area);
+  double effectiveness = calculateEffectiveness();
   std::cout << "\n=================================\n";
 
   std::cout
@@ -70,6 +74,26 @@ void HeatExchanger::calculate()
       << std::fixed << std::setprecision(2)
       << area
       << " m" << "\u00B2" << "\n";
+  std::cout 
+      << "Cmin : "
+      << Cmin
+      << "kW/K\n";
+  std::cout
+      << "Cmax : "
+      << Cmax
+      << "kW/K\n";
+  std::cout
+      << "Capacity Ratio : "
+      << Cmin/Cmax
+      << "\n";
+  std::cout
+      <<"NTU : "
+      << NTU
+      << "\n";
+  std::cout
+      << "Effectiveness : "
+      << effectiveness
+      << "\n";
 }
 
 double HeatExchanger::calculateLMTD() const{
@@ -102,3 +126,56 @@ double HeatExchanger::calculateLMTD() const{
 double HeatExchanger::calculateArea(double heatDuty, double lmtd) const {
   return heatDuty / (overallU * lmtd);
 };
+
+double HeatExchanger::calculateCMin() const
+{
+  double Ch = hotFluid.massFlowRate * hotFluid.specificHeat;
+  double Cc = coldFluid.massFlowRate * coldFluid.specificHeat;
+
+  return std::min(Ch, Cc);
+}
+
+double HeatExchanger::calculateCMax() const
+{
+  double Ch = hotFluid.massFlowRate * hotFluid.specificHeat;
+  double Cc = coldFluid.massFlowRate * coldFluid.specificHeat;
+
+  return std::max(Ch, Cc);
+}
+
+double HeatExchanger::calculateNTU(double area) const
+{
+  return (overallU * area) / calculateCMin();
+}
+
+double HeatExchanger::calculateCounterFlowEffectiveness(double NTU, double Cr) const
+{
+  return (1-std::exp(-NTU * (1-Cr)))
+  /
+  (1-Cr*std::exp(-NTU*(1 - Cr)));
+}
+
+double HeatExchanger::calculateParallelFlowEffectiveness(double NTU, double Cr) const
+{
+  return (1 - std::exp(-NTU * ( 1 + Cr)))
+  /
+  (1 + Cr);
+}
+
+double HeatExchanger::calculateEffectiveness() const
+{
+  double area = calculateArea(std::abs(hotFluid.heatDuty()),calculateLMTD());
+
+  double NTU = calculateNTU(area);
+
+  double Cr = calculateCMin() / calculateCMax();
+
+  switch(flowtype){
+    case FlowType::Counter:
+      return calculateCounterFlowEffectiveness(NTU, Cr);
+    case FlowType::Parallel:
+      return calculateParallelFlowEffectiveness(NTU, Cr);
+  }
+  return 0.0;
+}
+
