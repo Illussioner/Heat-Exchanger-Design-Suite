@@ -3,6 +3,8 @@
 #include <cmath>
 #include <iomanip>
 #include <algorithm>
+#include <sstream>
+#include "Report.h"
 HeatExchanger::HeatExchanger()
 {
 }
@@ -55,45 +57,49 @@ void HeatExchanger::calculate()
   double Cmax = calculateCMax();
   double NTU = calculateNTU(area);
   double effectiveness = calculateEffectiveness();
-  std::cout << "\n=================================\n";
 
-  std::cout
+  std::ostringstream report;
+  report << "\n=================================\n";
+
+  report
     << "Heat Duty :"
     << std::fixed << std::setprecision(2)
     << Qhot
     <<"kW\n";
 
-  std::cout
+  report
       << "LMTD : "
       << std::fixed << std::setprecision(2)
       << lmtd
       << " " << "\u00B0" << "C\n";
 
-  std::cout
+  report
       << "Required Area : "
       << std::fixed << std::setprecision(2)
       << area
       << " m" << "\u00B2" << "\n";
-  std::cout 
+  report 
       << "Cmin : "
       << Cmin
       << "kW/K\n";
-  std::cout
+  report
       << "Cmax : "
       << Cmax
       << "kW/K\n";
-  std::cout
+  report
       << "Capacity Ratio : "
       << Cmin/Cmax
       << "\n";
-  std::cout
+  report
       <<"NTU : "
       << NTU
       << "\n";
-  std::cout
+  report
       << "Effectiveness : "
       << effectiveness
       << "\n";
+  std::cout << report.str();
+  Report::save("../reports/Report.txt", report.str());
 }
 
 double HeatExchanger::calculateLMTD() const{

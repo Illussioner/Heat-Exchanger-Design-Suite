@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/HeatExchanger.dir/src/Fluid.cpp.obj.d"
   "CMakeFiles/HeatExchanger.dir/src/HeatExchanger.cpp.obj"
   "CMakeFiles/HeatExchanger.dir/src/HeatExchanger.cpp.obj.d"
+  "CMakeFiles/HeatExchanger.dir/src/Report.cpp.obj"
+  "CMakeFiles/HeatExchanger.dir/src/Report.cpp.obj.d"
   "CMakeFiles/HeatExchanger.dir/src/main.cpp.obj"
   "CMakeFiles/HeatExchanger.dir/src/main.cpp.obj.d"
   "HeatExchanger.exe"

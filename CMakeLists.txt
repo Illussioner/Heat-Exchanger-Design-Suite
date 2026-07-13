@@ -12,4 +12,5 @@ add_executable(
     src/main.cpp
     src/Fluid.cpp
     src/HeatExchanger.cpp
+    src/Report.cpp
 )

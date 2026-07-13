@@ -7,22 +7,34 @@ int main()
   
   std::cout << "=================================\n";
   std::cout << " Heat Exchanger Design Suite\n";
+  std::cout << " Version 1.0.0\n";
+  std::cout << " Author : Ishan Jain\n";
   std::cout << "=================================\n";
 
-  try
-  {
-    HeatExchanger exchanger;
+  char again;
 
-    exchanger.inputData();
-
-    exchanger.calculate();
-  }
-  catch (const std::exception &e)
+  do
   {
-    std::cout
-    << "\nError: "
-    << e.what()
-    << '\n';
-  }
+    try
+    {
+      HeatExchanger exchanger;
+
+      exchanger.inputData();
+
+      exchanger.calculate();
+
+      std::cout
+          << "\nPerform another calculation? (y/n): ";
+      std::cin >> again;
+    }
+    catch (const std::exception &e)
+    {
+      std::cout
+          << "\nError: "
+          << e.what()
+          << '\n';
+    }
+  } while (again == 'y' || again == 'Y');
+  
   return 0;
 }

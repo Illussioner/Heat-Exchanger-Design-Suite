@@ -176,6 +176,30 @@ src/HeatExchanger.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\HeatExchanger.dir\build.make CMakeFiles/HeatExchanger.dir/src/HeatExchanger.cpp.s
 .PHONY : src/HeatExchanger.cpp.s
 
+src/Report.obj: src/Report.cpp.obj
+.PHONY : src/Report.obj
+
+# target to build an object file
+src/Report.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\HeatExchanger.dir\build.make CMakeFiles/HeatExchanger.dir/src/Report.cpp.obj
+.PHONY : src/Report.cpp.obj
+
+src/Report.i: src/Report.cpp.i
+.PHONY : src/Report.i
+
+# target to preprocess a source file
+src/Report.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\HeatExchanger.dir\build.make CMakeFiles/HeatExchanger.dir/src/Report.cpp.i
+.PHONY : src/Report.cpp.i
+
+src/Report.s: src/Report.cpp.s
+.PHONY : src/Report.s
+
+# target to generate assembly for a file
+src/Report.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\HeatExchanger.dir\build.make CMakeFiles/HeatExchanger.dir/src/Report.cpp.s
+.PHONY : src/Report.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -215,6 +239,9 @@ help:
 	@echo ... src/HeatExchanger.obj
 	@echo ... src/HeatExchanger.i
 	@echo ... src/HeatExchanger.s
+	@echo ... src/Report.obj
+	@echo ... src/Report.i
+	@echo ... src/Report.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
