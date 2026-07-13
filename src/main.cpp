@@ -4,12 +4,11 @@
 int main()
 {
   std::setlocale(LC_ALL, ".UTF-8");
-  
-  std::cout << "=================================\n";
-  std::cout << " Heat Exchanger Design Suite\n";
-  std::cout << " Version 1.0.0\n";
-  std::cout << " Author : Ishan Jain\n";
-  std::cout << "=================================\n";
+
+  std::cout << "=====================================================\n";
+  std::cout << "           Heat Exchanger Design Suite\n";
+  std::cout << "                    Version 1.0.0\n";
+  std::cout << "=====================================================\n\n";
 
   char again;
 
@@ -22,19 +21,25 @@ int main()
       exchanger.inputData();
 
       exchanger.calculate();
-
-      std::cout
-          << "\nPerform another calculation? (y/n): ";
-      std::cin >> again;
     }
     catch (const std::exception &e)
     {
-      std::cout
-          << "\nError: "
-          << e.what()
-          << '\n';
+      std::cerr << "\nError : "
+                << e.what()
+                << "\n";
     }
+
+    std::cout << "\n-------------------------------------------\n";
+
+    std::cout << "Perform another calculation? (Y/N): ";
+
+    std::cin >> again;
+
+    std::cout << "\n";
+
   } while (again == 'y' || again == 'Y');
-  
+
+  std::cout << "\nThank you for using Heat Exchanger Design Suite.\n";
+
   return 0;
 }
