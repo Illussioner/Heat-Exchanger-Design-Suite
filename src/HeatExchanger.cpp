@@ -59,45 +59,74 @@ void HeatExchanger::calculate()
   double effectiveness = calculateEffectiveness();
 
   std::ostringstream report;
-  report << "\n=================================\n";
+  report << std::fixed
+         << std::setprecision(2);
+  report
+      << "\n=====================================================\n";
 
   report
-    << "Heat Duty :"
-    << std::fixed << std::setprecision(2)
-    << Qhot
-    <<"kW\n";
+      << "                DESIGN RESULTS\n";
 
   report
-      << "LMTD : "
-      << std::fixed << std::setprecision(2)
-      << lmtd
-      << " " << "\u00B0" << "C\n";
+      << "=====================================================\n\n";
 
-  report
-      << "Required Area : "
-      << std::fixed << std::setprecision(2)
-      << area
-      << " m" << "\u00B2" << "\n";
-  report 
-      << "Cmin : "
-      << Cmin
-      << "kW/K\n";
-  report
-      << "Cmax : "
-      << Cmax
-      << "kW/K\n";
-  report
-      << "Capacity Ratio : "
-      << Cmin/Cmax
-      << "\n";
-  report
-      <<"NTU : "
-      << NTU
-      << "\n";
-  report
-      << "Effectiveness : "
-      << effectiveness
-      << "\n";
+  report << std::left
+         << std::setw(25)
+         << "Heat Duty"
+         << ": "
+         << Qhot
+         << " kW\n";
+
+  report << std::left
+         << std::setw(25)
+         << "LMTD"
+         << ": "
+         << lmtd
+         << " " << "\u00B0" << "C\n";
+
+  report << std::left
+         << std::setw(25)
+         << "Required Area"
+         << ": "
+         << area
+         << " m" << "\u00B2" << "\n";
+
+  report << std::left
+         << std::setw(25)
+         << "Minimum Heat Capacity"
+         << ": "
+         << Cmin
+         << " kW/K\n";
+
+  report << std::left
+         << std::setw(25)
+         << "Maximum Heat Capacity"
+         << ": "
+         << Cmax
+         << " kW/K\n";
+
+  report << std::left
+         << std::setw(25)
+         << "Capacity Ratio"
+         << ": "
+         << Cmin / Cmax
+         << "\n";
+
+  report << std::left
+         << std::setw(25)
+         << "NTU"
+         << ": "
+         << NTU
+         << "\n";
+
+  report << std::left
+         << std::setw(25)
+         << "Effectiveness"
+         << ": "
+         << effectiveness
+         << "\n";
+
+  report << "\n=====================================================\n";
   std::cout << report.str();
   Report::save("../reports/Report.txt", report.str());
 }
