@@ -1,51 +1,98 @@
-# Heat Exchanger Design Suite
+# 🔥 Heat Exchanger Design Suite
 
-A modern C++ application for designing and analyzing heat exchangers using classical thermal engineering methods.
+A modern **C++17** application for designing and analyzing heat exchangers using classical thermal engineering methods.
 
-## Features
+---
+
+## ✨ Features
 
 - Heat Duty Calculation
-- LMTD (Counter Flow & Parallel Flow)
+- Log Mean Temperature Difference (LMTD)
 - Heat Transfer Area Calculation
-- NTU Method
-- Effectiveness Method
+- Number of Transfer Units (NTU)
+- Heat Exchanger Effectiveness
+- Counter Flow Analysis
+- Parallel Flow Analysis
 - Input Validation
-- Report Generation
-- Object-Oriented Design
+- Exception Handling
+- Automatic Report Generation
+- Modular Object-Oriented Design
 - CMake Build System
 
-## Technologies
+---
+
+## 🛠️ Technologies
 
 - C++17
 - CMake
-- OOP
+- Object-Oriented Programming
+- STL
 - File Handling
 - Exception Handling
+- Git & GitHub
 
-## Project Structure
+---
+
+## 📂 Project Structure
 
 ```text
-include/
-src/
-reports/
-images/
+Heat-Exchanger-Design-Suite/
+
+├── include/
+├── src/
+├── reports/
+├── images/
+├── CMakeLists.txt
+└── README.md
 ```
 
-## Sample Output
+---
 
-![Output](images/output.png)
+## ⚙️ Engineering Calculations
 
-## Engineering Equations
+The software implements:
 
 - Heat Duty
 - LMTD
+- Heat Transfer Area
 - NTU
 - Effectiveness
+- Capacity Ratio
 
-## Future Improvements
+for both:
+
+- Counter Flow Heat Exchangers
+- Parallel Flow Heat Exchangers
+
+---
+
+## 📷 Sample Output
+
+![Sample Output](images/output.png)
+
+```text
+Heat Duty        : 501.60 kW
+LMTD             : 99.67 °C
+Required Area    : 6.29 m²
+NTU              : 0.60
+Effectiveness    : 0.40
+```
+
+---
+
+## 🚀 Future Improvements
 
 - Qt GUI
 - CSV Export
-- PDF Reports
+- PDF Report Generation
 - Temperature Profile Graphs
-- Multiple Heat Exchanger Types
+- Shell-and-Tube Heat Exchanger Support
+- Cross Flow Heat Exchanger Support
+
+---
+
+## 👨‍💻 Author
+
+**Ishan Jain**
+
+Chemical Engineering, IIT (BHU) Varanasi
